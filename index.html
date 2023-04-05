@@ -1,51 +1,65 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Meu Portfólio</title>
-	<link rel="stylesheet" href="style.css">
-</head>
-<body>
-	<header>
-		<h1>Meu Portfólio</h1>
-		<nav>
-			<ul>
-				<li><a href="#">Início</a></li>
-				<li><a href="#">Projetos</a></li>
-				<li><a href="#">Sobre mim</a></li>
-				<li><a href="#">Contato</a></li>
-			</ul>
-		</nav>
-	</header>
-	<main>
-		<section>
-			<h2>Sobre mim</h2>
-			<p>Olá! Meu nome é [seu nome] e sou um desenvolvedor de 16 anos desde que tinha 12 anos de idade. Meu foco principal é criar aplicativos, websites e jogos, sempre buscando novos desafios e oportunidades de aprendizado.</p>
-			<p>Eu sou da Figueira da Foz, Portugal e você pode entrar em contato comigo através do meu Discord ou e-mail. Atualmente, estou trabalhando em mim mesmo, evoluindo todos os dias uma parte de mim.</p>
-			<p>Fora do mundo do desenvolvimento, adoro jogar Valorant e futebol. Se você tem alguma ideia ou projeto em que possa contribuir, não hesite em entrar em contato comigo. Estou sempre pronto para novas oportunidades!</p>
-			<h3>Minhas habilidades</h3>
-			<ul>
-				<li>HTML5</li>
-				<li>CSS3</li>
-				<li>JavaScript</li>
-				<li>Java</li>
-				<li>PHP</li>
-			</ul>
-		</section>
-		<section>
-			<h2>Projetos</h2>
-			<ul>
-				<li><a href="#">Projeto 1</a></li>
-				<li><a href="#">Projeto 2</a></li>
-				<li><a href="#">Projeto 3</a></li>
-				<li><a href="#">Projeto 4</a></li>
-			</ul>
-		</section>
-	</main>
-	<footer>
-		<p>&copy; 2023 - Meu Portfólio</p>
-		<p><a href="mailto:simaopks009@gmail.com">simaopks009@gmail.com</a> - <a href="https://discord.com/users/simaodiazz#6213">simaodiazz#6213</a></p>
-	</footer>
-</body>
-</html>
+<header>
+  <h1>Meu Site</h1>
+  <nav>
+    <ul>
+      <li><a href="#about">Sobre Mim</a></li>
+      <li><a href="#skills">Habilidades</a></li>
+      <li><a href="#projects">Projetos</a></li>
+      <li><a href="#contact">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="about">
+    <h2>Sobre Mim</h2>
+    <p>Aqui você pode escrever um pouco sobre você e sua experiência.</p>
+  </section>
+
+  <section id="skills">
+    <h2>Habilidades</h2>
+    <ul>
+      <li>JavaScript</li>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>React</li>
+      <li>Node.js</li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2>Projetos</h2>
+    <ul>
+      <li><a href="#">Projeto 1</a></li>
+      <li><a href="#">Projeto 2</a></li>
+      <li><a href="#">Projeto 3</a></li>
+      <li><a href="#">Projeto 4</a></li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contato</h2>
+    <p>Entre em contato comigo através do formulário abaixo ou dos links para redes sociais.</p>
+    <form>
+      <label for="name">Nome:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Mensagem:</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+    <div class="social-media">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Feito por mim</p>
+</footer>
