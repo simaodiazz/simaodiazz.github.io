@@ -114,6 +114,29 @@
         .glow-card:hover::before {
             transform: translateX(100%);
         }
+
+        /* Estilos da Navbar */
+        #main-nav a {
+            position: relative;
+        }
+        #main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2dd4bf; /* teal-400 */
+            transition: width 0.3s ease-in-out;
+        }
+        #main-nav a:hover::after,
+        #main-nav a.active::after {
+            width: 50%;
+        }
+        #main-nav a.active {
+            color: #2dd4bf; /* text-teal-400 */
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-400">
@@ -122,15 +145,9 @@
   <div class="spotlight"></div>
 
   <!-- Header/Nav -->
-  <header class="bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-800">
-    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-      <a href="#" class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-teal-500 rounded-full" viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-        </svg>
-        <span class="ml-3 text-xl font-bold">Simão Dias</span>
-      </a>
-      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center font-semibold text-slate-300">
+  <header id="header" class="bg-slate-900/80 backdrop-blur-xl sticky top-0 z-50 border-b border-slate-800 transition-all duration-300">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-center">
+      <nav id="main-nav" class="flex flex-wrap items-center text-base justify-center font-semibold text-slate-300">
         <a href="#sobre" class="mr-6 hover:text-teal-400 transition-colors">Sobre</a>
         <a href="#projetos" class="mr-6 hover:text-teal-400 transition-colors">Projetos</a>
         <a href="#experiencia" class="mr-6 hover:text-teal-400 transition-colors">Habilidades</a>
@@ -141,7 +158,7 @@
   </header>
 
   <!-- Hero -->
-  <section class="flex text-slate-300 body-font min-h-screen justify-center items-center -mt-20 px-4">
+  <section id="hero" class="flex text-slate-300 body-font min-h-screen justify-center items-center -mt-20 px-4">
     <div class="container mx-auto flex py-24 items-center justify-center flex-col">
       <div class="text-center lg:w-3/4 w-full">
         <h1 class="title-font sm:text-7xl text-5xl mb-4 font-extrabold text-white reveal">
@@ -411,13 +428,51 @@
   <!-- Script para animações de scroll e spotlight do mouse -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Animações de scroll
+        const header = document.getElementById('header');
+        const navLinks = document.querySelectorAll('#main-nav a');
+        const sections = document.querySelectorAll('main section, #hero');
+
+        // Efeito de scroll na Navbar
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('bg-slate-900/95', 'shadow-lg');
+            } else {
+                header.classList.remove('bg-slate-900/95', 'shadow-lg');
+            }
+        });
+
+        // Scroll Spy para links da Navbar
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const sectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // Animações de scroll para o conteúdo
         const revealElements = document.querySelectorAll('.reveal, .reveal-section, .reveal-card');
-        const observer = new IntersectionObserver((entries) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, {
@@ -425,7 +480,7 @@
             rootMargin: '0px 0px -50px 0px'
         });
         revealElements.forEach(el => {
-            observer.observe(el);
+            revealObserver.observe(el);
         });
 
         // Efeito de spotlight do mouse
